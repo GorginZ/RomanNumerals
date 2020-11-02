@@ -8,46 +8,29 @@ namespace RomanNumeral_App
   {
     static void Main(string[] args)
     {
-      // Console.WriteLine("Hello World!");
-      // ConvertToRomanNumeral(5);
       ReturnNumberComponents(24);
     }
 
-    public static string ConvertToRomanNumeral(int number)
+    public static string ConvertToRomanNumeral(List<int> numbers)
     {
       var resultNumerals = "";
-
-      var romanList = Enum.GetValues(typeof(RomanNumeral));
-      foreach (RomanNumeral numeral in romanList)
+      foreach (int number in numbers)
       {
-        var intNumeral = (int)numeral;
-        if (intNumeral == number)
+        var romanList = Enum.GetValues(typeof(RomanNumeral));
+        foreach (RomanNumeral numeral in romanList)
         {
-          resultNumerals += numeral.ToString();
+          var intNumeral = (int)numeral;
+          if (intNumeral == number)
+          {
+            resultNumerals += numeral.ToString();
+          }
         }
-      }
 
+      }
       return resultNumerals;
+
     }
 
-    //base numerals
-    // Number	Numeral	Words
-    // 1	I	one
-    // 5	V	five
-    // 10	X	ten
-    // 50	L	fifty
-    // 100	C	one hundred
-    // 500	D	five hundred
-    // 1000	M	one thousand
-
-    //subtractive (one less)
-    // Number	Numeral	Words
-    // 4	IV	four
-    // 9	IX	nine
-    // 40	XL	forty
-    // 90	XC	ninety
-    // 400	CD	four hundred
-    // 900	CM	nine hundred
 
     public static List<int> ReturnNumberComponents(int number)
     {

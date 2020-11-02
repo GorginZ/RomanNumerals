@@ -3,23 +3,22 @@ using System;
 namespace RomanNumeral_App
 {
 
-    public enum RomanNumeral
-    {
-        I = 1,
-        V = 5,
-        X = 10,
-        L = 50,
-        C = 100,
-        D = 500,
-        M = 1000
-    }
+  public enum RomanNumeral
+  {
+    I = 1,
+    IV = 4,
+    V = 5,
+    IX = 9,
+    X = 10,
+    XL = 40,
+    L = 50,
+    XC = 90,
+    C = 100,
+    CD = 400,
+    D = 500,
+    CM = 900,
+    M = 1000
+  }
 
 }
 
-// 1	I	one
-// 5	V	five
-// 10	X	ten
-// 50	L	fifty
-// 100	C	one hundred
-// 500	D	five hundred
-// 1000	M	one thousand
