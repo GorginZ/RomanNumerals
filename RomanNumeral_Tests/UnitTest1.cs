@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using System.Collections.Generic;
 using RomanNumeral_App;
 //base numerals
 // Number	Numeral	Words
@@ -22,13 +23,31 @@ using RomanNumeral_App;
 
 namespace RomanNumeral_Tests
 {
-    public class UnitTest1
+  public class UnitTest1
+  {
+    [Fact]
+    public void CanConvertANumberToABaseNumeral()
     {
-        [Fact]
-        public void CanConvertANumberToABaseNumeral()
-        {
-           var numeral = Program.ConvertToRomanNumeral(5);
-           Assert.Equal(RomanNumeral.V.ToString(), numeral);
-        }
+      var numbers = new List<int> { 10, 10, 4 };
+      var numeral = Program.ConvertToRomanNumeral(numbers);
+      //  XXIV
+      var expected = RomanNumeral.X.ToString() + RomanNumeral.X.ToString() + RomanNumeral.IV.ToString();
+      Assert.Equal(expected, numeral);
     }
+
+    public void WillNotRepeatNumeralMoreThanThreeTimes()
+    {
+
+    }
+
+    public void AllSubtractiveNumeralsCanOnlyAppearOnceInAnySequence()
+    {
+
+    }
+
+    public void OnlyReprsentNumbersBetween1And3999(){
+
+    }
+    
+  }
 }
