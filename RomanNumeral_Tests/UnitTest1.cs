@@ -28,25 +28,47 @@ namespace RomanNumeral_Tests
     [Fact]
     public void CanConvertANumberToABaseNumeral()
     {
-      var numbers = new List<int> { 10, 10, 4 };
-      var numeral = Program.ConvertToRomanNumeral(numbers);
-      //  XXIV
+      var number = 24;
+      var numeral = Program.ConvertToRomanNumeral(number);
       var expected = RomanNumeral.X.ToString() + RomanNumeral.X.ToString() + RomanNumeral.IV.ToString();
       Assert.Equal(expected, numeral);
     }
 
-    public void WillNotRepeatNumeralMoreThanThreeTimes()
+    [Theory]
+    [InlineData(40, RomanNumeral.XL)]
+    [InlineData(400, RomanNumeral.CD)]
+    public void WillNotRepeatNumeralMoreThanThreeTimes(int number, RomanNumeral expectedNumeral)
     {
-
+      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var expectedNumeralString = expectedNumeral.ToString();
+      Assert.Equal(expectedNumeralString, actualNumeral);
     }
 
+    [Fact]
+    public void BaseNumeralsCanBeRepresentedUpToThreeTime()
+    {
+      var number = 300;
+      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var expectedNumeral =RomanNumeral.C.ToString() + RomanNumeral.C.ToString() + RomanNumeral.C.ToString();
+      Assert.Equal(expectedNumeral, actualNumeral);
+    }
+
+    [Fact]
     public void AllSubtractiveNumeralsCanOnlyAppearOnceInAnySequence()
     {
-
+      var number = 8;
+      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var expectedNumeral = RomanNumeral.V.ToString() + RomanNumeral.I.ToString() + RomanNumeral.I.ToString() + RomanNumeral.I.ToString();
+      Assert.Equal(expectedNumeral, actualNumeral);
     }
 
-    public void OnlyReprsentNumbersBetween1And3999(){
-
+    [Theory]
+    [InlineData("0", Validation.Invalid)]
+    [InlineData("3999", Validation.Valid)]
+    public void OnlyRepresentNumbersBetween1And3999(string number, Validation expected)
+    {
+      var actualValidation = Program.CheckInput(number);
+      Assert.Equal(expected, actualValidation);
     }
     
   }

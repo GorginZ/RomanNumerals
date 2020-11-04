@@ -4,65 +4,68 @@ using System.Linq;
 
 namespace RomanNumeral_App
 {
-  public class Program
-  {
-    static void Main(string[] args)
+    public class Program
     {
-      ReturnNumberComponents(24);
-    }
-
-    public static string ConvertToRomanNumeral(List<int> numbers)
-    {
-      var resultNumerals = "";
-      foreach (int number in numbers)
-      {
-        var romanList = Enum.GetValues(typeof(RomanNumeral));
-        foreach (RomanNumeral numeral in romanList)
+        static void Main(string[] args)
         {
-          var intNumeral = (int)numeral;
-          if (intNumeral == number)
-          {
-            resultNumerals += numeral.ToString();
-          }
+            GetNumeralNumberComponents(24);
         }
 
-      }
-      return resultNumerals;
-
-    }
-
-
-    public static List<int> ReturnNumberComponents(int number)
-    {
-      List<int> allRomanNumeralValues = new List<int> { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
-      List<int> potentialValues = new List<int>();
-
-      List<int> resultValues = new List<int>();
-
-      //find list of values less than the number
-      foreach (int value in allRomanNumeralValues)
-      {
-        if (value <= number)
+        public static string ConvertToRomanNumeral(int input)
         {
-          potentialValues.Add(value);
+            var numbers = GetNumeralNumberComponents(input);
+            var resultNumerals = "";
+            foreach (int number in numbers)
+            {
+                var romanList = Enum.GetValues(typeof(RomanNumeral));
+                foreach (RomanNumeral numeral in romanList)
+                {
+                    var intNumeral = (int)numeral;
+                    if (intNumeral == number)
+                    {
+                        resultNumerals += numeral.ToString();
+                    }
+                }
+
+            }
+            return resultNumerals;
+
         }
-      }
-      //finding the numeral component we want to use
-      //we want to look at the last number of the array
-      while (number != 0)
-      {
-        resultValues.Add(potentialValues.Last());
-        Console.WriteLine(potentialValues.Last());
-        number = number - potentialValues.Last();
 
-        //update relevantNumbers
-        potentialValues = potentialValues.Where(x => x <= number).ToList();
+        public static List<int> GetNumeralNumberComponents(int number)
+        {
+            List<int> allRomanNumeralValues = new List<int> { 1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000 };
+            List<int> potentialValues = new List<int>();
 
-      }
-      Console.WriteLine(resultValues.ToString());
-      return resultValues;
+            List<int> resultValues = new List<int>();
+
+            foreach (int value in allRomanNumeralValues)
+            {
+                if (value <= number)
+                {
+                    potentialValues.Add(value);
+                }
+            }
+            while (number != 0)
+            {
+                resultValues.Add(potentialValues.Last());
+                number = number - potentialValues.Last();
+                potentialValues = potentialValues.Where(x => x <= number).ToList();
+            }
+            return resultValues;
+        }
+
+        public static Validation CheckInput(string input)
+        {
+            var isInt = int.TryParse(input, out int number);
+            if (number <= 0 || number > 3999)
+            {
+                return Validation.Invalid;
+            }
+            else
+            {
+                return Validation.Valid;
+            }
+        }
     }
-
-
-  }
 }
