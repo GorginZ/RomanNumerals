@@ -29,7 +29,7 @@ namespace RomanNumeral_Tests
     public void CanConvertANumberToABaseNumeral()
     {
       var number = "24";
-      var numeral = Program.ConvertToRomanNumeral(number);
+      var numeral = NumeralConverter.ConvertToRomanNumeral(number);
       var expected = RomanNumeral.X.ToString() + RomanNumeral.X.ToString() + RomanNumeral.IV.ToString();
       Assert.Equal(expected, numeral);
     }
@@ -39,7 +39,7 @@ namespace RomanNumeral_Tests
     [InlineData("400", RomanNumeral.CD)]
     public void WillNotRepeatNumeralMoreThanThreeTimes(string number, RomanNumeral expectedNumeral)
     {
-      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var actualNumeral = NumeralConverter.ConvertToRomanNumeral(number);
       var expectedNumeralString = expectedNumeral.ToString();
       Assert.Equal(expectedNumeralString, actualNumeral);
     }
@@ -48,7 +48,7 @@ namespace RomanNumeral_Tests
     public void BaseNumeralsCanBeRepresentedUpToThreeTime()
     {
       var number = "300";
-      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var actualNumeral = NumeralConverter.ConvertToRomanNumeral(number);
       var expectedNumeral =RomanNumeral.C.ToString() + RomanNumeral.C.ToString() + RomanNumeral.C.ToString();
       Assert.Equal(expectedNumeral, actualNumeral);
     }
@@ -57,7 +57,7 @@ namespace RomanNumeral_Tests
     public void AllSubtractiveNumeralsCanOnlyAppearOnceInAnySequence()
     {
       var number = "8";
-      var actualNumeral = Program.ConvertToRomanNumeral(number);
+      var actualNumeral = NumeralConverter.ConvertToRomanNumeral(number);
       var expectedNumeral = RomanNumeral.V.ToString() + RomanNumeral.I.ToString() + RomanNumeral.I.ToString() + RomanNumeral.I.ToString();
       Assert.Equal(expectedNumeral, actualNumeral);
     }
@@ -67,7 +67,7 @@ namespace RomanNumeral_Tests
     [InlineData("3999", Validation.Valid)]
     public void OnlyRepresentNumbersBetween1And3999(string number, Validation expected)
     {
-      var actualValidation = Program.CheckInput(number);
+      var actualValidation = Validator.CheckInput(number);
       Assert.Equal(expected, actualValidation);
     }
     
