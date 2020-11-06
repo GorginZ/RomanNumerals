@@ -8,12 +8,22 @@ namespace RomanNumeral_App
     {
         static void Main(string[] args)
         {
-            GetNumeralNumberComponents(24);
+          Console.WriteLine("Roman Numeral Converter. Enter a number between 1 and 3999 to see it as a numeral!");
+          var userInput = Console.ReadLine();
+          var validationStatus = CheckInput(userInput);
+          while (validationStatus == Validation.Invalid)
+          {
+            Console.WriteLine("Can only represent numbers between 1 and 3999. Try another number!");
+            userInput = Console.ReadLine();
+           
+          }
+            ConvertToRomanNumeral(userInput);
         }
 
-        public static string ConvertToRomanNumeral(int input)
+        public static string ConvertToRomanNumeral(string input)
         {
-            var numbers = GetNumeralNumberComponents(input);
+          int inputNumber = int.Parse(input);
+            var numbers = GetNumeralNumberComponents(inputNumber);
             var resultNumerals = "";
             foreach (int number in numbers)
             {
