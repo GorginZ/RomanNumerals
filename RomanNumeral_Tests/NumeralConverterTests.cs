@@ -23,7 +23,7 @@ using RomanNumeral_App;
 
 namespace RomanNumeral_Tests
 {
-  public class UnitTest1
+  public class NumeralConverterTests
   {
     [Fact]
     public void CanConvertANumberToABaseNumeral()
@@ -47,9 +47,10 @@ namespace RomanNumeral_Tests
     [Fact]
     public void BaseNumeralsCanBeRepresentedUpToThreeTime()
     {
-      var number = "300";
+      var number = "3999";
       var actualNumeral = NumeralConverter.ConvertToRomanNumeral(number);
-      var expectedNumeral =RomanNumeral.C.ToString() + RomanNumeral.C.ToString() + RomanNumeral.C.ToString();
+   
+      var expectedNumeral = RomanNumeral.M.ToString() + RomanNumeral.M.ToString() + RomanNumeral.M.ToString() + RomanNumeral.CM.ToString() + RomanNumeral.XC.ToString() + RomanNumeral.IX.ToString();
       Assert.Equal(expectedNumeral, actualNumeral);
     }
 
@@ -62,14 +63,6 @@ namespace RomanNumeral_Tests
       Assert.Equal(expectedNumeral, actualNumeral);
     }
 
-    [Theory]
-    [InlineData("0", Validation.Invalid)]
-    [InlineData("3999", Validation.Valid)]
-    public void OnlyRepresentNumbersBetween1And3999(string number, Validation expected)
-    {
-      var actualValidation = Validator.CheckInput(number);
-      Assert.Equal(expected, actualValidation);
-    }
-    
+
   }
 }
